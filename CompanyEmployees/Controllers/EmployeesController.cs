@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Contracts;
+using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyEmployees.Controllers
@@ -30,8 +32,9 @@ namespace CompanyEmployees.Controllers
                 return NotFound();
             }
             var employeesFromDb = _repository.Employee.GetEmployees(companyId, trackChanges: false);
-            
-            return Ok(employeesFromDb);
+            var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
+
+            return Ok(employeesDto);
         }
     }
 }
