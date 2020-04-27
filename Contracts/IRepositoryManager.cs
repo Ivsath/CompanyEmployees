@@ -4,6 +4,6 @@ namespace Contracts
     {
         ICompanyRepository Company { get; }
         IEmployeeRepository Employee { get; }
-        void save();
+        void Save();
     }
 }

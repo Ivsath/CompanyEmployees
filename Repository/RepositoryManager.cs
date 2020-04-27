@@ -36,6 +36,6 @@ namespace Repository
             }
         }
 
-        public void save() => _repositoryContext.SaveChanges();
+        public void Save() => _repositoryContext.SaveChanges();
     }
 }
