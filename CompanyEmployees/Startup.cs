@@ -38,6 +38,11 @@ namespace CompanyEmployees
             services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.ConfigureSqlContext(Configuration);
 
             services.AddControllers(config =>

@@ -71,6 +71,12 @@ namespace CompanyEmployees.Controllers
                 return BadRequest("EmployeeForCreationDto object is null");
             }
 
+            if(!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid model state for the EmployeeForCreationDto object");
+                return UnprocessableEntity(ModelState);
+            }
+
             var company = _repository.Company.GetCompany(companyId, trackChanges: false);
             if(company == null)
             {
