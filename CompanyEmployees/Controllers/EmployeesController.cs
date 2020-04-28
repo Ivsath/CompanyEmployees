@@ -6,6 +6,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CompanyEmployees.Controllers
 {
@@ -180,7 +181,15 @@ namespace CompanyEmployees.Controllers
 
             // The patchDoc variable can apply only to the EmployeeForUpdateDto type
             var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
-            patchDoc.ApplyTo(employeeToPatch);
+            patchDoc.ApplyTo(employeeToPatch, ModelState);
+
+            TryValidateModel(employeeToPatch);
+            if(!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid model state for the patch document");
+                return UnprocessableEntity(ModelState);
+            }
+
             // We map again to the Employee type
             _mapper.Map(employeeToPatch, employeeEntity);
             _repository.Save();
