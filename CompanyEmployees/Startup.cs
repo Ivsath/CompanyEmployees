@@ -44,6 +44,7 @@ namespace CompanyEmployees
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
             services.AddScoped <IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+            services.AddScoped<ValidateMediaTypeAttribute>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
