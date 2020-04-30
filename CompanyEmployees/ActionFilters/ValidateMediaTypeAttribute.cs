@@ -9,6 +9,10 @@ namespace CompanyEmployees.ActionFilters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
+        }
+
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
             var acceptHeaderPresent = context.HttpContext.Request.Headers.ContainsKey("Accept");
 
             if (!acceptHeaderPresent)
@@ -26,10 +30,6 @@ namespace CompanyEmployees.ActionFilters
             }
 
             context.HttpContext.Items.Add("AcceptHeaderMediaType", outMediaType);
-        }
-
-        public void OnActionExecuting(ActionExecutingContext context)
-        {
         }
     }
 }
