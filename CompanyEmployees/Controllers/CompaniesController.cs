@@ -27,7 +27,7 @@ namespace CompanyEmployees.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCompanies")]
         public async Task<IActionResult> GetCompanies()
         {
             var companies = await _repository.Company.GetAllCompaniesAsync(trackChanges: false);
@@ -36,7 +36,7 @@ namespace CompanyEmployees.Controllers
             return Ok(companiesDto);
         }
 
-        [HttpGet("{id}", Name = "CompanyById")]
+        [HttpGet("{id}", Name = "GetCompany")]
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _repository.Company.GetCompanyAsync(id, trackChanges: false);
@@ -50,7 +50,7 @@ namespace CompanyEmployees.Controllers
             return Ok(companyDto);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateCompany")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody]CompanyForCreationDto company)
         {
@@ -61,7 +61,7 @@ namespace CompanyEmployees.Controllers
 
             var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
 
-            return CreatedAtRoute("CompanyById", new { id = companyToReturn.Id },
+            return CreatedAtRoute("GetCompany", new { id = companyToReturn.Id },
                 companyToReturn);
         }
 

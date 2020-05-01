@@ -58,6 +58,9 @@ namespace CompanyEmployees.Extensions
                     newtonsoftJsonOutputFormatter
                         .SupportedMediaTypes
                         .Add("application/vnd.ivsath.hateoas+json");
+                    newtonsoftJsonOutputFormatter
+                        .SupportedMediaTypes
+                        .Add("application/vnd.ivsath.apiroot+json");
                 }
 
                 var xmlOutputFormatter = config.OutputFormatters
@@ -67,6 +70,9 @@ namespace CompanyEmployees.Extensions
                     xmlOutputFormatter
                         .SupportedMediaTypes
                         .Add("application/vnd.ivsath.hateoas+xml");
+                    xmlOutputFormatter
+                        .SupportedMediaTypes
+                        .Add("application/vnd.ivsath.apiroot+xml");
                 }
             });
         }
