@@ -86,6 +86,15 @@ namespace CompanyEmployees.Extensions
                 opt.AssumeDefaultVersionWhenUnspecified = true;
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
                 opt.ApiVersionReader = new HeaderApiVersionReader("api-version");
+                // If we have a lot of versions of a single controller, we can assign these versions in
+                // the configuration instead:
+                // opt.Conventions.Controller<CompaniesController>()
+                //     .HasApiVersion(new ApiVersion(1,
+                //         0));
+                // opt.Conventions.Controller<CompaniesV2Controller>()
+                //     .HasDeprecatedApiVersion(new ApiVersion(2,
+                //         0));
+                // Now, we can remove the [ApiVersion] attribute from the controllers.
             });
         }
     }
