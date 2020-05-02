@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CompanyEmployees.Controllers
 {
     [ApiVersion("2.0")]
-    [Route("api/companies")]
-    [ApiController]
+    [Route("api/{v:apiversion}/companies")]    [ApiController]
     public class CompaniesV2Controller : ControllerBase
     {
         private readonly IRepositoryManager _repository;
