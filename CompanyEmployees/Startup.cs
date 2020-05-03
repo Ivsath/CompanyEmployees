@@ -49,6 +49,7 @@ namespace CompanyEmployees
             services.AddScoped<EmployeeLinks>();
 
             services.ConfigureVersioning();
+            services.ConfigureResponseCaching();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -61,6 +62,7 @@ namespace CompanyEmployees
                 {
                     config.RespectBrowserAcceptHeader = true;
                     config.ReturnHttpNotAcceptable = true;
+                    config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
                 })
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters()
@@ -93,6 +95,8 @@ namespace CompanyEmployees
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
+
+            app.UseResponseCaching();
 
             app.UseRouting();
 

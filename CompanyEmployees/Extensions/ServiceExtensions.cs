@@ -97,5 +97,8 @@ namespace CompanyEmployees.Extensions
                 // Now, we can remove the [ApiVersion] attribute from the controllers.
             });
         }
+
+        public static void ConfigureResponseCaching(this IServiceCollection services) =>
+            services.AddResponseCaching();
     }
 }
