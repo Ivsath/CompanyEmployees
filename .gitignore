@@ -229,3 +229,4 @@ Thumbs.db
 .idea
 
 Project/
+**/.env
