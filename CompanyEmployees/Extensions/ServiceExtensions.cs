@@ -161,10 +161,10 @@ namespace CompanyEmployees.Extensions
                 .AddDefaultTokenProviders();
         }
 
-        public static void ConfigureJWT(this IServiceCollection services, IConfiguration
-            configuration)
+        public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
+            // Add SECRET key to zshrc or bashrc
             var secretKey = Environment.GetEnvironmentVariable("SECRET");
 
             services.AddAuthentication(opt => {
