@@ -193,6 +193,32 @@ namespace CompanyEmployees.Extensions
             {
                 s.SwaggerDoc("v1", new OpenApiInfo {Title = "Company Employees API", Version = "v1"});
                 s.SwaggerDoc("v2", new OpenApiInfo {Title = "Company Employees API", Version = "v2"});
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Specify the authorization token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT"
+                });
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Name = "Bearer",
+                        },
+                        new List<string>()
+                    }
+                });
             });
         }
     }
